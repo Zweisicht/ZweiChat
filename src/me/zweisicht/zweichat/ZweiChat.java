@@ -25,6 +25,7 @@ public class ZweiChat extends JavaPlugin{
 		
 		getCommand("q").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
 		getCommand("qq").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
+		getCommand("bancheck").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
 		
 		//Events laden
 		registerEvent();
