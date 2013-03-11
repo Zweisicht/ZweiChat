@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ZweiModChat {
 	
-	Player player;
-	World world;
+	private boolean mchatOn = false;
+	private Player player;
+
 	
 	String text = "";
 	
@@ -25,43 +25,7 @@ public class ZweiModChat {
 	ArrayList<String> playerON = new ArrayList<String>();
 	
 	
-	void checkPlayerCommands(CommandSender sender, Command cmd, String label, String[] args){
-		
-		this.sender = sender;
-		this.cmd = cmd;
-		this.label = label;
-		this.args = args;
-		
-		
-		if(sender instanceof Player){
-			player = (Player) sender;
-			world = player.getWorld();	
-			
-			if(sender instanceof Player){
-				player = (Player) sender;
-				world = player.getWorld();
-				
-					
-			//Prüft ob er schreiben darf.
-			if(player.hasPermission("zweichat.MODchat") == true){
-				
-				//Konsolenbefehle
-				if(cmd.getName().equalsIgnoreCase("q")){
-					commandQ();
-				}
-				
-				
-				
-				if(cmd.getName().equalsIgnoreCase("qq")){
-					commandQQ();
-				}
-				
-			}
-			
 
-		}
-		}
-	}
 boolean checkON(String name, String msg){
 	
 	
@@ -111,43 +75,33 @@ boolean ifON = false;
 		
 	
 	//Command /q
-	void commandQ(){
-		
-		Server server = Bukkit.getServer();
-		Player[] online = server.getOnlinePlayers();
-		Player playerToSend;		
-				for (int i=0; i < args.length; i++){
-					
-					text = text + " " + args[i];
-					
-				}
-				
-				if(text == ""){
-					
-					for (int i=0; i <  playerON.size(); i++){
-						
-						if(playerON.get(i) == player.getName()){
-							player.sendMessage(ChatColor.RED + "<ZweiChat><MOD>"+ ChatColor.GREEN + "Der Chat ist an!");
-							return;
-						}
-					}
-					
-				}else{
-				
-				for (int i=0; i <  online.length; i++){
 
-					playerToSend =  server.getPlayer(online[i].getName());
-					
-					if (playerToSend.hasPermission("zweichat.MODchat") == true){
-						playerToSend.sendMessage(ChatColor.RED + "----<MOD>"+ ChatColor.AQUA + "<" + player.getName() + ">" + text);
-					}
-			
-			
-			}
-			text = "";
-		}
+	public void commandQ(Player sender, String[] params)
+	  {
+		//Parameter abfangen und in textvariable schreiben
+	    for (int i = 0; i < params.length; i++)
+	    {
+	      this.text = (this.text + " " + params[i]);
+	    }
+	    //Solange Text nciht leer ist
+	    if (!this.text.equals(""))
+	    {// spätere Funktion evtl
+	      if (!this.mchatOn)
+	      {//An jedes Playerobjekt in der Rückgabe von getOnlinePlayers Nachricht schicken
+	        for (Player player : sender.getServer().getOnlinePlayers())
+	        {
+	          if (player.hasPermission("ZweiChat.mod"))
+	          {
+	            player.sendMessage(ChatColor.RED + "----<MOD>" + ChatColor.AQUA + "<" + sender.getName() + ">" + this.text);
+	          }
 
-		
-	}
+	        }
+
+	      }
+
+	    }
+
+	    this.text = "";
+	  }
 	
 }
