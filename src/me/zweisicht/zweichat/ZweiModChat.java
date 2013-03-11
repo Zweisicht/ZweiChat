@@ -83,7 +83,7 @@ boolean ifON = false;
 	    {
 	      this.text = (this.text + " " + params[i]);
 	    }
-	    //Solange Text nciht leer ist
+	    //Solange Text nicht leer ist
 	    if (!this.text.equals(""))
 	    {// spätere Funktion evtl
 	      if (!this.mchatOn)
