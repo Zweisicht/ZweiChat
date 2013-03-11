@@ -9,6 +9,7 @@ public class ZweiChat extends JavaPlugin{
 	ZweiModChat ModChat = new ZweiModChat();
 	ZweiVipChat VIPChat = new ZweiVipChat();
 	ZweiIpBlocker IpBlocker = new ZweiIpBlocker();
+	BanCheck bancheck = new BanCheck();
 	
 
 	
@@ -23,8 +24,12 @@ public class ZweiChat extends JavaPlugin{
 
 		//Commands abfangen und auslagern 
 		
-		getCommand("q").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
-		getCommand("qq").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
+		getCommand("q").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker, bancheck));
+		getCommand("qq").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker, bancheck));
+		getCommand("isbanned").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker, bancheck));
+
+
+
 		
 		//Events laden
 		registerEvent();
