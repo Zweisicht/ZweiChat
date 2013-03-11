@@ -20,13 +20,11 @@ public class ZweiChat extends JavaPlugin{
 	@Override
 	public void onEnable(){
 		System.out.println("ZweiChat aktiviert.");
-		
-		
 
-		
 		//Commands abfangen und auslagern 
 		
 		getCommand("q").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
+		getCommand("qq").setExecutor(new ComExec(this, ModChat, VIPChat, IpBlocker));
 		
 		//Events laden
 		registerEvent();
@@ -35,10 +33,9 @@ public class ZweiChat extends JavaPlugin{
 	
 	
 	
-private void registerEvent(){//Event-Teil
-		
+	private void registerEvent(){
+		//Event-Teil		
 		ChatListener = new ZweiListener(this);
-		
 	}
 
 
