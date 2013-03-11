@@ -5,9 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ComExec
-  implements CommandExecutor
-{
+public class ComExec implements CommandExecutor {
 
   private ZweiChat plugin;
   private ZweiModChat modChat;
@@ -25,24 +23,41 @@ public class ComExec
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] params)
   {
     if ((sender instanceof Player)) {
+    	
       Player player = (Player)sender;
 
+      //Befehl auswerten und übergeben
+      switch (cmd.getName()) {
       
-      //Befehl für q Chat
-      if (cmd.getName().equalsIgnoreCase("q")) {
-        if (player.hasPermission("ZweiChat.mod"))
-        {
-          this.modChat.commandQ(player, params);
-        }
-        else
-        {
-          player.sendMessage("Du hast nicht die nötigen Rechte!");
-        }
+      	case "q":
+      		if (player.hasPermission("ZweiChat.MODchat"))
+      		{
+      			modChat.commandQ(player, params);
+      		}
+      		else
+    	    {
+      			player.sendMessage("Du hast nicht die nötigen Rechte!");
+    	    }
 
-        return true;
-      }
+    	    return true;
+  
+      	case "qq":
+      		if (player.hasPermission("ZweiChat.MODchat"))
+      		{
+      			modChat.commandQQ(player);
+      		}
+      		else
+      		{
+      			player.sendMessage("Du hast nicht die nötigen Rechte!");
+      		}
 
+      		return true;
+
+      } 
+      
+      
     }
+     
     else
     {
       sender.sendMessage("You must be a player!");
@@ -51,4 +66,5 @@ public class ComExec
 
     return false;
   }
+
 }
