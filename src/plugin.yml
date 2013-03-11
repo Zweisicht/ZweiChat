@@ -1,0 +1,16 @@
+name:  ZweiChat
+version:  1.6
+description: ModChat, VIP-Chat, IpBlocker und CapsBlocker. Mehr Infos auf www.zweisicht.at
+author:  Zweisicht
+website:  http://zweisicht.at/
+
+main:  me.zweisicht.zweichat.ZweiChat
+
+commands:  
+  q:
+    description:  ModChat
+  qq:
+    description:  Standard Mod-Chat an/aus.
+  vchat:
+    description:  Standard VIP-Chat an/aus.
+  isbanned:
